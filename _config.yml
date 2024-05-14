@@ -19,18 +19,18 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: JSDevBlog  # the main title
+title: 오늘의 리뷰 가격 설명   # the main title
 
-tagline: 개발 공부 + 취미 블로그 # it will display as the sub-title
+tagline: 쇼핑, 핫아이템, SNS유명한, 할인정보# it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  coding, github, git, 백준, 코딩, 파이썬, c++, cpp
+  쇼핑, 핫아이템, SNS유명한, 할인정보
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url:  "https://jason9288.github.io"
+url:  "https://todayreview.github.io"
 
 github:
-  username: jason9288 # change to your github username
+  username: todayreview # change to your github username
 
 twitter:
   username: . # change to your twitter username
@@ -38,12 +38,12 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: jason9288
-  email: jason9288@hanyang.ac.kr # change to your email address
+  name: todayreview
+  email:  # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - # change to your twitter homepage
-    - https://github.com/jason9288 # change to your github homepage
+    -  # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
