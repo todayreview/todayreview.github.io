@@ -21,7 +21,7 @@ timezone: Asia/Seoul
 
 title: 오늘의 리뷰 # the main title
 
-tagline: 쇼핑, 핫아이템, SNS유명한, 할인정보# it will display as the sub-title
+tagline: 쇼핑, 핫아이템, SNS유명한, 할인정보 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   쇼핑, 핫아이템, SNS유명한, 할인정보
