@@ -19,7 +19,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: 오늘의 리뷰 가격 설명   # the main title
+title: 오늘의 리뷰 # the main title
 
 tagline: 쇼핑, 핫아이템, SNS유명한, 할인정보# it will display as the sub-title
 
