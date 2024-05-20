@@ -30,7 +30,7 @@ description: >- # used by seo meta and the atom feed
 url:  "https://todayreview.github.io"
 
 github:
-  username: todayreview # change to your github username
+  username: # change to your github username
 
 twitter:
   username: . # change to your twitter username
