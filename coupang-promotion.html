@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠팡 특가 상품 - 오늘만 특별 할인!</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff4e4e;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #ff4e4e;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4e4e, #ff6b6b);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            box-shadow: 0 5px 15px rgba(255, 78, 78, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 78, 78, 0.6);
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 4rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff4e4e;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Products Section */
+        .products {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .sale-price {
+            color: #ff4e4e;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .discount-badge {
+            background: #ff4e4e;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: #ff4e4e;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background: #e63e3e;
+        }
+
+        /* Promotion Banner */
+        .promotion-banner {
+            background: linear-gradient(135deg, #ff4e4e, #ff6b6b);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .banner-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .timer-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .timer-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .timer {
+                flex-wrap: wrap;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-shopping-cart"></i> 쿠팡 특가
+                </a>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#products">상품</a></li>
+                        <li><a href="#deals">특가</a></li>
+                        <li><a href="#contact">문의</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-fire"></i> 쿠팡 대특가 세일!</h1>
+            <p>오늘만 특별한 가격으로 만나보세요. 최대 70% 할인!</p>
+            <a href="#products" class="cta-button">
+                <i class="fas fa-shopping-bag"></i> 지금 쇼핑하기
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title scroll-animate">왜 쿠팡을 선택해야 할까요?</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>빠른 배송</h3>
+                    <p>로켓배송으로 다음날 바로 받아보세요. 전국 어디든 빠르고 안전하게 배송됩니다.</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>안전한 결제</h3>
+                    <p>다양한 결제 수단과 안전한 결제 시스템으로 걱정 없이 쇼핑하세요.</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>무료 반품</h3>
+                    <p>만족하지 않으시면 무료로 반품 가능합니다. 고객 만족이 최우선입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title scroll-animate">오늘의 특가 상품</h2>
+            <div class="products-grid">
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">고성능 노트북 컴퓨터</h3>
+                        <div class="product-price">
+                            <span class="original-price">1,500,000원</span>
+                            <span class="sale-price">999,000원</span>
+                            <span class="discount-badge">33% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">최신 스마트폰</h3>
+                        <div class="product-price">
+                            <span class="original-price">1,200,000원</span>
+                            <span class="sale-price">799,000원</span>
+                            <span class="discount-badge">34% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">무선 블루투스 헤드폰</h3>
+                        <div class="product-price">
+                            <span class="original-price">300,000원</span>
+                            <span class="sale-price">159,000원</span>
+                            <span class="discount-badge">47% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">55인치 4K 스마트 TV</h3>
+                        <div class="product-price">
+                            <span class="original-price">2,000,000원</span>
+                            <span class="sale-price">1,299,000원</span>
+                            <span class="discount-badge">35% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">게이밍 콘솔</h3>
+                        <div class="product-price">
+                            <span class="original-price">800,000원</span>
+                            <span class="sale-price">599,000원</span>
+                            <span class="discount-badge">25% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-animate">
+                    <div class="product-image">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">디지털 카메라</h3>
+                        <div class="product-price">
+                            <span class="original-price">1,800,000원</span>
+                            <span class="sale-price">1,199,000원</span>
+                            <span class="discount-badge">33% 할인</span>
+                        </div>
+                        <button class="buy-button">
+                            <i class="fas fa-cart-plus"></i> 장바구니 담기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotion Banner -->
+    <section class="promotion-banner" id="deals">
+        <div class="container">
+            <div class="banner-content">
+                <h2><i class="fas fa-clock"></i> 타임 세일 진행중!</h2>
+                <p>이 특가는 오늘까지! 놓치면 후회하는 기회입니다.</p>
+                <div class="timer">
+                    <div class="timer-item">
+                        <span class="timer-number" id="hours">12</span>
+                        <span class="timer-label">시간</span>
+                    </div>
+                    <div class="timer-item">
+                        <span class="timer-number" id="minutes">34</span>
+                        <span class="timer-label">분</span>
+                    </div>
+                    <div class="timer-item">
+                        <span class="timer-number" id="seconds">56</span>
+                        <span class="timer-label">초</span>
+                    </div>
+                </div>
+                <a href="#products" class="cta-button">
+                    <i class="fas fa-bolt"></i> 지금 바로 구매하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2024 쿠팡 특가 상품 홍보 페이지. 모든 권리 보유.</p>
+            <p>문의: support@coupang-promo.com | 전화: 1588-1234</p>
+            <div style="margin-top: 1rem;">
+                <i class="fab fa-facebook" style="margin: 0 10px; font-size: 1.5rem;"></i>
+                <i class="fab fa-twitter" style="margin: 0 10px; font-size: 1.5rem;"></i>
+                <i class="fab fa-instagram" style="margin: 0 10px; font-size: 1.5rem;"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on load
+
+        // Countdown timer
+        function updateTimer() {
+            const now = new Date().getTime();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const distance = tomorrow.getTime() - now;
+            
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Run immediately
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.buy-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-check"></i> 장바구니에 추가됨!';
+                this.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-cart-plus"></i> 장바구니 담기';
+                    this.style.background = '#ff4e4e';
+                }, 2000);
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
